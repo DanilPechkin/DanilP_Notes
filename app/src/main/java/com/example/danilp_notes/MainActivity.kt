@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         cardParams.setMargins(10, 10,10, 10)
         var shape = GradientDrawable()
         shape.cornerRadius = 30F
-        shape.setColor(R.color.colorCardBackgroud)
+        shape.setBackgroundColor(Color.parseColor("#CD660C"))
         card.background = shape
         card.layoutParams = cardParams
         card.setContentPadding(10, 10,10,10)
@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         var cardlay = LinearLayout(this)
         cardlay.orientation = LinearLayout.VERTICAL
 
+        var zagolovok = TextView(this)
         card.addView(cardlay)
         
         lay.addView(card)
