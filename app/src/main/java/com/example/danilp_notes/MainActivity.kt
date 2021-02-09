@@ -43,6 +43,17 @@ class MainActivity : AppCompatActivity() {
         cardlay.orientation = LinearLayout.VERTICAL
 
         var zagolovok = TextView(this)
+        zagolovok.setText("Заголовок")
+        zagolovok.setTextColor(Color.parseColor(""))
+        zagolovok.setTextSize()
+
+        var mtext = TextView(this)
+        mtext.setText("Текст записки")
+        mtext.setTextColor(Color.parseColor(""))
+        mtext.setTextSize()
+        
+        cardlay.addView(zagolovok)
+        cardlay.addView(mtext)
         card.addView(cardlay)
         
         lay.addView(card)
