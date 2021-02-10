@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
 
 
         button.setOnClickListener{
+            num++
             val contentValues = ContentValues()
             contentValues.put(DBHelper.KEY_HEADER, "")
             contentValues.put(DBHelper.KEY_NOTE, "")
