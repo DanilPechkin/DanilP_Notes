@@ -42,9 +42,9 @@ class MainActivity : AppCompatActivity() {
 
         if(cursor.moveToFirst()){
             do {
+                num = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.KEY_ID))
                 createNew(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.KEY_HEADER)),
                 cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.KEY_NOTE)))
-                num++
             }while (cursor.moveToNext())
         }
 
@@ -89,11 +89,15 @@ class MainActivity : AppCompatActivity() {
 
         var header = TextView(this)
         header.text = headertext
+        header.hint = "Header"
         header.setTextColor(Color.parseColor("#CCFCB759"))
+        header.setHintTextColor(Color.parseColor("#CCFCB759"))
         header.textSize = 20F
 
         var note = TextView(this)
         note.text = notetext
+        note.hint = "Your note"
+        note.setHintTextColor(Color.parseColor("#CCFCB759"))
         note.setTextColor(Color.parseColor("#CCFCB759"))
         note.textSize = 16F
 

@@ -57,6 +57,11 @@ class Edit : AppCompatActivity() {
         startActivity(intent)
     }
     private fun onDelete(){
+        val selectionArgs = arrayOf(id)
 
+        database.delete(DBHelper.TABLE_CONTACTS, selection, selectionArgs)
+
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 }
