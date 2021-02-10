@@ -7,6 +7,7 @@ import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -16,15 +17,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+
         button.setOnClickListener{
-            createNew()
+            createNew("Header","Your note")
         }
     }
-    @SuppressLint("ResourceAsColor")
-    fun createNew(){
-        lateinit var lay: LinearLayout
-        if (layturn) lay = findViewById(R.id.firstlay)
-        else lay = findViewById(R.id.secondlay)
+
+    private fun createNew(headertext : String, notetext : String){
+        var lay: LinearLayout = if (layturn) findViewById(R.id.firstlay)
+        else findViewById(R.id.secondlay)
+        layturn = !layturn
+
         var card = CardView(this)
         val cardParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
@@ -33,27 +38,27 @@ class MainActivity : AppCompatActivity() {
         cardParams.setMargins(10, 10,10, 10)
         var shape = GradientDrawable()
         shape.cornerRadius = 30F
-        shape.setBackgroundColor(Color.parseColor("#CD660C"))
+        shape.setColor(Color.parseColor("#CD660C"))
         card.background = shape
         card.layoutParams = cardParams
-        card.setContentPadding(10, 10,10,10)
+        card.setContentPadding(20, 10,20,20)
         card.cardElevation = 8F
         card.maxCardElevation = 12F
         var cardlay = LinearLayout(this)
         cardlay.orientation = LinearLayout.VERTICAL
 
-        var zagolovok = TextView(this)
-        zagolovok.setText("Заголовок")
-        zagolovok.setTextColor(Color.parseColor(""))
-        zagolovok.setTextSize()
+        var header = TextView(this)
+        header.text = headertext
+        header.setTextColor(Color.parseColor("#CCFCB759"))
+        header.textSize = 20F
 
-        var mtext = TextView(this)
-        mtext.setText("Текст записки")
-        mtext.setTextColor(Color.parseColor(""))
-        mtext.setTextSize()
+        var note = TextView(this)
+        note.text = notetext
+        note.setTextColor(Color.parseColor("#CCFCB759"))
+        note.textSize = 16F
         
-        cardlay.addView(zagolovok)
-        cardlay.addView(mtext)
+        cardlay.addView(header)
+        cardlay.addView(note)
         card.addView(cardlay)
         
         lay.addView(card)
