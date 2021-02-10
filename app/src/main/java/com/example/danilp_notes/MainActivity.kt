@@ -2,6 +2,7 @@ package com.example.danilp_notes
 
 import android.annotation.SuppressLint
 import android.app.ActionBar
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +47,12 @@ class MainActivity : AppCompatActivity() {
         card.maxCardElevation = 12F
         var cardlay = LinearLayout(this)
         cardlay.orientation = LinearLayout.VERTICAL
+
+        card.setOnClickListener{
+            val intent = Intent(this, Edit::class.java)
+            intent.putExtra("key", 1)
+            startActivity(intent)
+        }
 
         var header = TextView(this)
         header.text = headertext
