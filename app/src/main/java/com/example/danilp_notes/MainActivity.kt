@@ -60,7 +60,6 @@ class MainActivity : AppCompatActivity() {
             editor.apply()
             val intent = Intent(this, Edit::class.java)
             startActivity(intent)
-
             createNew("Header","Your note")
         }
     }
