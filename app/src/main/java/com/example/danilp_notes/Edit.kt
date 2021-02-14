@@ -6,7 +6,12 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.card_edit.*
 import java.lang.reflect.Array
@@ -38,12 +43,36 @@ class Edit : AppCompatActivity() {
             Header.setText(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.KEY_HEADER)))
             Note.setText(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.KEY_NOTE)))
         }
-        buttonBack.setOnClickListener{
-            onSave()
+
+        val actionBar = supportActionBar
+        actionBar!!.setHomeButtonEnabled(true)
+        actionBar!!.setDisplayHomeAsUpEnabled(true)
+        actionBar.title = ""
+        val colorDrawable = ColorDrawable(Color.parseColor("#CD660C"))
+        actionBar.setBackgroundDrawable(colorDrawable)
+        actionBar.setHomeAsUpIndicator(R.drawable.backbutton)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.action_delete -> {
+                onDelete()
+                return true
+            }
+            R.id.action_set_time -> {
+                return true
+            }
         }
-        buttonDelete.setOnClickListener{
-            onDelete()
-        }
+        return super.onOptionsItemSelected(item)
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onSave()
+        return true
     }
     private fun onSave(){
         val selectionArgs = arrayOf(id)

@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="colorCardBackgroud">#CD660C</color>
+    <color name="colorMenu">#E4C390</color>
+    <color name="colorMenuText">#CD660C</color>
 </resources>
