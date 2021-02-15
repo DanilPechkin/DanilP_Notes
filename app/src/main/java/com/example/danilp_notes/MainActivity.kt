@@ -62,6 +62,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             createNew("Header","Your note")
         }
+        val actionBar = supportActionBar
+        actionBar.title = "My notes"
     }
 
     private fun createNew(headertext : String, notetext : String){
