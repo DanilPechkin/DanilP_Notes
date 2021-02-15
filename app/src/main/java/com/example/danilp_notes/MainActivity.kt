@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
@@ -18,14 +19,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
-
+    // Changing lay for spawning note
     var layturn : Boolean = true
-
+    // Sets card id textview
     var num : Int = 1
-
+    // Saves card id for Edit
     val APP_PREFERENCES : String = "mysettings"
     val APP_PREFERENCES_ID : String = "PresentId"
     lateinit var mSettings : SharedPreferences
+    // Db
     lateinit var dbHelper: DBHelper
     lateinit var database: SQLiteDatabase
 
@@ -33,10 +35,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Initiate db
         dbHelper = DBHelper(this)
         database = dbHelper.writableDatabase
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
 
+        // Show saved notes
         val cursor: Cursor = database.query(DBHelper.TABLE_CONTACTS, null,
             null, null, null, null, null)
 
@@ -48,13 +52,16 @@ class MainActivity : AppCompatActivity() {
             }while (cursor.moveToNext())
         }
 
-
+        // Button creates new note
         button.setOnClickListener{
+            // id ++
             num++
+            // Create new note in DB
             val contentValues = ContentValues()
             contentValues.put(DBHelper.KEY_HEADER, "")
             contentValues.put(DBHelper.KEY_NOTE, "")
             database.insert(DBHelper.TABLE_CONTACTS, null, contentValues)
+            // Save id to get it in Edit
             val editor = mSettings.edit()
             editor.putString(APP_PREFERENCES_ID, num.toString())
             editor.apply()
@@ -62,15 +69,17 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             createNew("Header","Your note")
         }
-        val actionBar = supportActionBar
-        actionBar.title = "My notes"
+        // Action bar
+        supportActionBar?.hide()
     }
-
+    // Create new note on main
     private fun createNew(headertext : String, notetext : String){
+        // Select lay for note
         var lay: LinearLayout = if (layturn) findViewById(R.id.firstlay)
         else findViewById(R.id.secondlay)
         layturn = !layturn
 
+        // Create note
         var card = CardView(this)
         val cardParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
@@ -107,6 +116,7 @@ class MainActivity : AppCompatActivity() {
         numtext.visibility = View.GONE
         numtext.text = num.toString()
 
+        // Listener for Edit
         card.setOnClickListener{
             val editor = mSettings.edit()
             editor.putString(APP_PREFERENCES_ID, numtext.text.toString())
@@ -115,7 +125,8 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, Edit::class.java)
             startActivity(intent)
         }
-        
+
+        // Add note to lay
         cardlay.addView(header)
         cardlay.addView(note)
         cardlay.addView(numtext)
