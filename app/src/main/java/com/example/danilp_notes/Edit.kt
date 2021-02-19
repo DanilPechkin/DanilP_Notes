@@ -100,13 +100,25 @@ class Edit : AppCompatActivity() {
 
     // Save note
     private fun onSave(){
-        val selectionArgs = arrayOf(id)
-        val contentValues = ContentValues()
-        contentValues.put(DBHelper.KEY_HEADER, Header.text.toString())
-        contentValues.put(DBHelper.KEY_NOTE, Note.text.toString())
+            val selectionArgs = arrayOf(id)
+            val contentValues = ContentValues()
 
-        database.update(DBHelper.TABLE_CONTACTS, contentValues, DBHelper.KEY_ID + "= ?", arrayOf(id));
+            if (Header.text.toString() == "" && Note.text.toString() == "") {
+                val selectionArgs = arrayOf(id)
 
+                database.delete(DBHelper.TABLE_CONTACTS, selection, selectionArgs)
+            }
+            else {
+                contentValues.put(DBHelper.KEY_HEADER, Header.text.toString())
+                contentValues.put(DBHelper.KEY_NOTE, Note.text.toString())
+
+                database.update(
+                    DBHelper.TABLE_CONTACTS,
+                    contentValues,
+                    DBHelper.KEY_ID + "= ?",
+                    arrayOf(id)
+                );
+            }
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }

@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -104,6 +105,7 @@ class MainActivity : AppCompatActivity() {
         header.setTextColor(Color.parseColor("#CCFCB759"))
         header.setHintTextColor(Color.parseColor("#CCFCB759"))
         header.textSize = 20F
+        header.setTypeface(null, Typeface.BOLD)
 
         var note = TextView(this)
         note.text = notetext
@@ -124,6 +126,14 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this, Edit::class.java)
             startActivity(intent)
+        }
+
+        //Check visibility
+        if (headertext == "") {
+            header.visibility = View.GONE
+        }
+        if (notetext == ""){
+            note.visibility = View.GONE
         }
 
         // Add note to lay
