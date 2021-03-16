@@ -6,4 +6,5 @@
     <color name="colorCardBackgroud">#CD660C</color>
     <color name="colorMenu">#E4C390</color>
     <color name="colorMenuText">#CD660C</color>
+    <color name="colorMenuIcon">#CCFCB759</color>
 </resources>

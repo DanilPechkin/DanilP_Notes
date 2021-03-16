@@ -7,8 +7,12 @@
         <item name="android:itemTextAppearance">@style/MyActionBar.MenuTextStyle</item>
         <!--To change the background of options menu-->
         <item name="android:itemBackground">@color/colorMenu</item>
+        <item name="android:actionOverflowButtonStyle">@style/MyActionButtonOverflow</item>
     </style>
 
+    <style name="MyActionButtonOverflow">
+        <item name="android:src">@drawable/menu_icon</item>
+    </style>
     <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="background">@color/colorCardBackgroud</item>
         <item name="titleTextStyle">@style/MyActionBarTitle</item>
